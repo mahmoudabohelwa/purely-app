@@ -1,0 +1,54 @@
+{{- if .Values.userService.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: purely-user-service
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.userService.replicaCount }}
+  selector:
+    matchLabels:
+      app: purely-user-service
+  template:
+    metadata:
+      labels:
+        app: purely-user-service
+    spec:
+      initContainers:
+        - name: wait-for-mongo
+          image: busybox
+          command:
+            - sh
+            - -c
+            - "until nc -z -v -w30 {{ .Values.userService.init.mongoHost }} {{ .Values.userService.init.mongoPort }}; do echo 'Waiting for MongoDB...'; sleep 5; done;"
+        - name: wait-for-eureka
+          image: busybox
+          command:
+            - sh
+            - -c
+            - "until nc -z -v -w30 {{ .Values.userService.init.eurekaHost }} {{ .Values.userService.init.eurekaPort }}; do echo 'Waiting for Eureka...'; sleep 5; done;"
+      containers:
+        - name: user-service
+          image: {{ .Values.userService.image.repository }}:{{ .Values.userService.image.tag }}
+          ports:
+            - containerPort: {{ .Values.userService.containerPort }}
+          env:
+            - name: SPRING_SECURITY_LOG_LEVEL
+              value: {{ .Values.userService.env.securityLogLevel }}
+            - name: eureka.client.service-url.defaultZone
+              value: {{ .Values.userService.env.eurekaDefaultZone }}
+#----------------------------------------------------------------------------------------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: purely-user-service
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: purely-user-service
+  ports:
+    - protocol: TCP
+      port: {{ .Values.userService.service.port }}
+      targetPort: {{ .Values.userService.containerPort }}
+  type: {{ .Values.userService.service.type }}
+{{- end }}

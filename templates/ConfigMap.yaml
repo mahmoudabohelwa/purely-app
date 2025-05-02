@@ -1,0 +1,107 @@
+#-----------------------------------------------------
+# ConfigMap for Auth Service
+#-----------------------------------------------------
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-service-config
+  namespace: {{ .Values.namespace }}
+  annotations:
+    "helm.sh/hook": pre-install
+data:
+  SPRING_DATA_MONGODB_HOST: purely-auth-service
+  SPRING_DATA_MONGODB_PORT: "27017"
+  SPRING_DATA_MONGODB_DATABASE: purely_auth_service
+  SPRING_SECURITY_LOG_LEVEL: DEBUG
+  eureka_client_service_url_defaultZone: http://eureka-server:8761/eureka/
+
+
+# --------------------------------------------------------------------------------
+# ConfigMap for Cart Service
+# -----------------------------------------------------------
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cart-service-config
+  namespace: {{ .Values.namespace }}
+  annotations:
+    "helm.sh/hook": pre-install
+data:
+  SPRING_APPLICATION_NAME: cart-service
+  SPRING_DATA_MONGODB_HOST: purely-cart-service
+  SPRING_DATA_MONGODB_PORT: "27017"
+  SPRING_DATA_MONGODB_DATABASE: purely_cart_service
+  SPRING_SECURITY_LOG_LEVEL: DEBUG
+  eureka_client_service_url_defaultZone: http://eureka-server:8761/eureka/
+
+
+
+# ----------------------------------------------------------------------------
+# ConfigMap for Category Service
+# -----------------------------------------------------------------------------
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: category-service-config
+  namespace: {{ .Values.namespace }}
+  annotations:
+    "helm.sh/hook": pre-install
+data:
+  SPRING_APPLICATION_NAME: category-service
+  SPRING_DATA_MONGODB_HOST: purely-category-service
+  SPRING_DATA_MONGODB_PORT: "27017"
+  SPRING_DATA_MONGODB_DATABASE: purely_category_service
+  SPRING_SECURITY_LOG_LEVEL: DEBUG
+  eureka_client_service_url_defaultZone: http://eureka-server:8761/eureka/
+
+# ---------------------------------------------------------------------------------------
+# ConfigMap for Frontend Service
+# ----------------------------------------------------------------------------------------
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: front-config
+  namespace: {{ .Values.namespace }}
+  annotations:
+    "helm.sh/hook": pre-install
+data:
+  API_BASE_URL: "http://purely.com/api-gateway"
+
+
+# -------------------------------------------------------------------------------------------
+# ConfigMap for Order Service
+# --------------------------------------------------------------------------------------------
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: order-service-config
+  namespace: {{ .Values.namespace }}
+  annotations:
+    "helm.sh/hook": pre-install
+data:
+  SPRING_APPLICATION_NAME: order-service
+  SPRING_DATA_MONGODB_HOST: purely-order-service
+  SPRING_DATA_MONGODB_PORT: "27017"
+  SPRING_DATA_MONGODB_DATABASE: purely_order_service
+  SPRING_SECURITY_LOG_LEVEL: DEBUG
+  eureka_client_service_url_defaultZone: http://eureka-server:8761/eureka/
+
+
+# -------------------------------------------------------------------------------------------
+# ConfigMap for Product Service
+# -------------------------------------------------------------------------------------------
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: product-service-config
+  namespace: {{ .Values.namespace }}
+  annotations:
+    "helm.sh/hook": pre-install
+data:
+  SPRING_APPLICATION_NAME: product-service
+  SPRING_DATA_MONGODB_HOST: purely-product-service
+  SPRING_DATA_MONGODB_PORT: "27017"
+  SPRING_DATA_MONGODB_DATABASE: purely_product_service
+  SPRING_SECURITY_LOG_LEVEL: DEBUG
+  eureka_client_service_url_defaultZone: http://eureka-server:8761/eureka/
