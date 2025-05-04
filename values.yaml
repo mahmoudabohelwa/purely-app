@@ -322,9 +322,3 @@ ingress:
       port: 8080
 
 
-#-----------------------------
-secret:
-  MONGODB_USERNAME: root
-  MONGODB_PASSWORD: example
-  MAIL_USERNAME: elrefymohamed20@gmail.com
-  MAIL_PASSWORD: fhfx czai mhyj ryon

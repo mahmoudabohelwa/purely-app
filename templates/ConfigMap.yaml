@@ -3,8 +3,7 @@ kind: ConfigMap
 metadata:
   name: auth-service-config
   namespace: {{ .Values.namespace }}
-  annotations:
-    "helm.sh/hook": pre-install
+  
 data:
   SPRING_DATA_MONGODB_HOST: purely-auth-service
   SPRING_DATA_MONGODB_PORT: "27017"
@@ -21,8 +20,7 @@ kind: ConfigMap
 metadata:
   name: cart-service-config
   namespace: {{ .Values.namespace }}
-  annotations:
-    "helm.sh/hook": pre-install
+  
 data:
   SPRING_APPLICATION_NAME: cart-service
   SPRING_DATA_MONGODB_HOST: purely-cart-service
@@ -41,8 +39,7 @@ kind: ConfigMap
 metadata:
   name: category-service-config
   namespace: {{ .Values.namespace }}
-  annotations:
-    "helm.sh/hook": pre-install
+  
 data:
   SPRING_APPLICATION_NAME: category-service
   SPRING_DATA_MONGODB_HOST: purely-category-service
@@ -58,8 +55,7 @@ kind: ConfigMap
 metadata:
   name: front-config
   namespace: {{ .Values.namespace }}
-  annotations:
-    "helm.sh/hook": pre-install
+  
 data:
   API_BASE_URL: "http://purely.com/api-gateway"
 
@@ -71,8 +67,7 @@ kind: ConfigMap
 metadata:
   name: order-service-config
   namespace: {{ .Values.namespace }}
-  annotations:
-    "helm.sh/hook": pre-install
+
 data:
   SPRING_APPLICATION_NAME: order-service
   SPRING_DATA_MONGODB_HOST: purely-order-service
@@ -89,8 +84,7 @@ kind: ConfigMap
 metadata:
   name: product-service-config
   namespace: {{ .Values.namespace }}
-  annotations:
-    "helm.sh/hook": pre-install
+  
 data:
   SPRING_APPLICATION_NAME: product-service
   SPRING_DATA_MONGODB_HOST: purely-product-service
