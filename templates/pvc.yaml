@@ -1,7 +1,4 @@
-# --------------------------------------------------
-# Purely Auth Service
-# ---------------------------------------------------
-{{- if .Values.purelyAuthService.enabled }}
+ {{- if .Values.purelyAuthService.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -15,9 +12,8 @@ spec:
       storage: {{ .Values.purelyAuthService.pvc.storage }}
 {{- end }}
 
-# ----------------------------------------------------------
-# Purely Cart Service 
-# ----------------------------------------------------------
+---
+
 {{- if .Values.purelyCartService.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -32,9 +28,9 @@ spec:
       storage: {{ .Values.purelyCartService.pvc.storage }}
 {{- end }}
 
-# -------------------------------------------------------------
-# Purely Category Service - Volume
-# --------------------------------------------------------------
+---
+
+
 {{- if .Values.purelyCategoryService.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -50,9 +46,10 @@ spec:
       storage: {{ .Values.purelyCategoryService.pvc.storage }}
 {{- end }}
 
-# -------------------------------------------------------------
-# Purely Order Service 
-# -------------------------------------------------------------
+
+---
+
+
 {{- if .Values.purelyOrderService.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -67,9 +64,10 @@ spec:
       storage: {{ .Values.purelyOrderService.pvc.storage }}
 {{- end }}
 
-# ---------------------------------------------------------------
-# Purely Product Service 
-# ---------------------------------------------------------------
+
+---
+
+
 {{- if .Values.purelyProductService.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim

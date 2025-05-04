@@ -37,7 +37,12 @@ spec:
               value: {{ .Values.userService.env.securityLogLevel }}
             - name: eureka.client.service-url.defaultZone
               value: {{ .Values.userService.env.eurekaDefaultZone }}
-#----------------------------------------------------------------------------------------------
+
+
+---
+
+
+
 apiVersion: v1
 kind: Service
 metadata:

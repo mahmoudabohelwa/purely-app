@@ -39,7 +39,11 @@ spec:
           hostPath:
             path: {{ .Values.purelyCategoryService.initScriptPath }}
             type: Directory
-#----------------------------------------------------------------------------------------------
+
+
+---
+
+
 apiVersion: v1
 kind: Service
 metadata:

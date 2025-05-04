@@ -8,7 +8,7 @@ apiGateway:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/api-gateway
+    repository: mohamedelrefy20/tapi-gateway
     tag: latest
   containerPort: 8080
   service:
@@ -24,7 +24,7 @@ authService:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/auth-service
+    repository: mohamedelrefy20/tauth-service
     tag: latest
   containerPort: 9030
   service:
@@ -46,7 +46,7 @@ cartService:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/cart-service
+    repository: mohamedelrefy20/tcart-service
     tag: latest
   containerPort: 9060
   service:
@@ -70,7 +70,7 @@ categoryService:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/category-service
+    repository: mohamedelrefy20/tcategory-service
     tag: latest
   containerPort: 9000
   service:
@@ -92,7 +92,7 @@ eurekaServer:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/eureka-server
+    repository: mohamedelrefy20/teureka-server
     tag: latest
   containerPort: 8761
   service:
@@ -124,7 +124,7 @@ notificationService:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/notification-service
+    repository: mohamedelrefy20/tnotification-service
     tag: latest
   containerPort: 9020
   service:
@@ -143,7 +143,7 @@ orderService:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/order-service
+    repository: mohamedelrefy20/torder-service
     tag: latest
   containerPort: 9070
   service:
@@ -164,7 +164,7 @@ productService:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/product-service
+    repository: mohamedelrefy20/tproduct-service
     tag: latest
   containerPort: 9010
   service:
@@ -290,7 +290,7 @@ userService:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/user-service
+    repository: mohamedelrefy20/tuser-service
     tag: latest
   containerPort: 9050
   init:
@@ -321,10 +321,8 @@ ingress:
       service: api-gateway
       port: 8080
 
-# ---------------------------------------------------------------------------------
-# Secret 
-# ----------------------------------------------------------------------------------
-namespace: purely-app
+
+#-----------------------------
 secret:
   MONGODB_USERNAME: root
   MONGODB_PASSWORD: example

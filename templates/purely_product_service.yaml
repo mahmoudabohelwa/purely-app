@@ -39,7 +39,10 @@ spec:
           hostPath:
             path: {{ .Values.purelyProductService.initScriptsPath }}
             type: Directory
-#-----------------------------------------------------------------------------------------------------
+
+
+---
+
 apiVersion: v1
 kind: Service
 metadata:

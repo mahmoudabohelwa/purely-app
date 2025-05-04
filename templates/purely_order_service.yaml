@@ -33,7 +33,11 @@ spec:
         - name: mongo-data
           persistentVolumeClaim:
             claimName: purely-order-service-pvc
-#---------------------------------------------------------------------------------------------------
+
+
+---
+
+
 apiVersion: v1
 kind: Service
 metadata:

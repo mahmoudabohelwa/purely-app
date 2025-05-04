@@ -39,7 +39,7 @@ spec:
             - name: eureka.client.service-url.defaultZone
               value: {{ .Values.categoryService.env.eurekaDefaultZone }}
 
-#------------------------------------------------------------------------
+---
 
 apiVersion: v1
 kind: Service

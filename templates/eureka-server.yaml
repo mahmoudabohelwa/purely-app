@@ -23,7 +23,8 @@ spec:
             - name: spring.application.name
               value: "{{ .Values.eurekaServer.env.springAppName }}"
 
-#-----------------------------------------------------------------------------------------------------------
+---
+
 
 apiVersion: v1
 kind: Service

@@ -34,7 +34,10 @@ spec:
         - name: mongo-data
           persistentVolumeClaim:
             claimName: purely-cart-service-pvc
-#-----------------------------------------------------------------------
+
+
+---
+
 apiVersion: v1
 kind: Service
 metadata:
