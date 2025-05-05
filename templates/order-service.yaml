@@ -32,11 +32,11 @@ spec:
           image: "{{ .Values.orderService.image.repository }}:{{ .Values.orderService.image.tag }}"
           ports:
             - containerPort: {{ .Values.orderService.containerPort }}
-          env:
-            - name: SPRING_SECURITY_LOG_LEVEL
-              value: {{ .Values.orderService.env.springSecurityLogLevel | quote }}
-            - name: eureka.client.service-url.defaultZone
-              value: {{ .Values.orderService.env.eurekaDefaultZone | quote }}
+          envFrom:
+            - configMapRef:
+                 name: order-service-config  
+            - secretRef:
+                 name: {{ .Values.secretName }} 
 
 ---
 

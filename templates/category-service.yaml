@@ -1,5 +1,4 @@
 {{- if .Values.categoryService.enabled }}
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -33,14 +32,12 @@ spec:
           image: "{{ .Values.categoryService.image.repository }}:{{ .Values.categoryService.image.tag }}"
           ports:
             - containerPort: {{ .Values.categoryService.containerPort }}
-          env:
-            - name: SPRING_SECURITY_LOG_LEVEL
-              value: {{ .Values.categoryService.env.springSecurityLogLevel }}
-            - name: eureka.client.service-url.defaultZone
-              value: {{ .Values.categoryService.env.eurekaDefaultZone }}
-
+          envFrom:
+            - configMapRef:
+                 name: category-service-config  
+            - secretRef:
+                name: {{ .Values.secretName }} 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:

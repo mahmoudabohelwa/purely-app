@@ -26,11 +26,10 @@ spec:
           image: "{{ .Values.notificationService.image.repository }}:{{ .Values.notificationService.image.tag }}"
           ports:
             - containerPort: {{ .Values.notificationService.containerPort }}
-          env:
-            - name: SPRING_SECURITY_LOG_LEVEL
-              value: {{ .Values.notificationService.env.springSecurityLogLevel | quote }}
-            - name: eureka.client.service-url.defaultZone
-              value: {{ .Values.notificationService.env.eurekaDefaultZone | quote }}
+          envFrom:
+            - secretRef:
+                 name: {{ .Values.secretName }} 
+
 
 ---
 

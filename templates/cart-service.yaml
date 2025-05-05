@@ -1,5 +1,4 @@
 {{- if .Values.cartService.enabled }}
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -58,11 +57,11 @@ spec:
           image: "{{ .Values.cartService.image.repository }}:{{ .Values.cartService.image.tag }}"
           ports:
             - containerPort: {{ .Values.cartService.containerPort }}
-          env:
-            - name: SPRING_SECURITY_LOG_LEVEL
-              value: {{ .Values.cartService.env.springSecurityLogLevel }}
-            - name: eureka.client.service-url.defaultZone
-              value: {{ .Values.cartService.env.eurekaDefaultZone }}
+          envFrom:
+            - configMapRef:
+                 name: cart-service-config  
+            - secretRef:
+                name: {{ .Values.secretName }} 
 
 ---
 

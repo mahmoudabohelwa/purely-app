@@ -26,18 +26,18 @@ spec:
           command:
             - sh
             - -c
-            - "until nc -z -v -w30 {{ .Values.productService.eurekaHost }} {{ .Values.productService.eurekaPort }}; do echo 'Waiting for Eureka...'; sleep 5; done;"        
+            - "until nc -z -v -w30 {{ .Values.productService.eurekaHost }} {{ .Values.productService.eurekaPort }}; do echo 'Waiting for Eureka...'; sleep 5; done;"
       containers:
         - name: product-service
           image: "{{ .Values.productService.image.repository }}:{{ .Values.productService.image.tag }}"
           ports:
             - containerPort: {{ .Values.productService.containerPort }}
-          env:
-            - name: SPRING_SECURITY_LOG_LEVEL
-              value: {{ .Values.productService.env.springSecurityLogLevel | quote }}
-            - name: eureka.client.service-url.defaultZone
-              value: {{ .Values.productService.env.eurekaDefaultZone | quote }}
-
+          envFrom:
+            - configMapRef:
+                 name: product-service-config  
+            - secretRef:
+                name: {{ .Values.secretName }} 
+  
 ---
 
 

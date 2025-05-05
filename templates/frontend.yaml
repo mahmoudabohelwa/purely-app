@@ -19,9 +19,9 @@ spec:
           image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
           ports:
             - containerPort: {{ .Values.frontend.containerPort }}
-          env:
-            - name: API_BASE_URL
-              value: {{ .Values.frontend.env.apiBaseUrl }}
+          envFrom:
+            - configMapRef:
+                 name: front-config
 
 ---
 

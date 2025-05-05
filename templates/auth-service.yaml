@@ -15,28 +15,29 @@ spec:
         app: auth-service
     spec:
       initContainers:
-      - name: wait-for-mongo
-        image: busybox
-        command:
-        - sh
-        - -c
-        - "until nc -z -v -w30 {{ .Values.authService.init.mongoHost }} {{ .Values.authService.init.mongoPort }}; do echo 'Waiting for MongoDB...'; sleep 5; done;"
-      - name: wait-for-eureka
-        image: busybox
-        command:
-        - sh
-        - -c
-        - "until nc -z -v -w30 {{ .Values.authService.init.eurekaHost }} {{ .Values.authService.init.eurekaPort }}; do echo 'Waiting for Eureka...'; sleep 5; done;"
+        - name: wait-for-mongo
+          image: busybox
+          command:
+            - sh
+            - -c
+            - "until nc -z -v -w30 {{ .Values.authService.init.mongoHost }} {{ .Values.authService.init.mongoPort }}; do echo 'Waiting for MongoDB...'; sleep 5; done;"
+        - name: wait-for-eureka
+          image: busybox
+          command:
+            - sh
+            - -c
+            - "until nc -z -v -w30 {{ .Values.authService.init.eurekaHost }} {{ .Values.authService.init.eurekaPort }}; do echo 'Waiting for Eureka...'; sleep 5; done;"
       containers:
-      - name: auth-service
-        image: "{{ .Values.authService.image.repository }}:{{ .Values.authService.image.tag }}"
-        ports:
-        - containerPort: {{ .Values.authService.containerPort }}
-        env:
-        - name: SPRING_SECURITY_LOG_LEVEL
-          value: {{ .Values.authService.env.springSecurityLogLevel }}
-        - name: eureka.client.service-url.defaultZone
-          value: {{ .Values.authService.env.eurekaDefaultZone }}
+        - name: auth-service
+          image: "{{ .Values.authService.image.repository }}:{{ .Values.authService.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.authService.containerPort }}    
+          envFrom:
+           - configMapRef:
+                name: auth-service-config  
+           - secretRef:
+               name: {{ .Values.secretName }}  
+
 
 ---
 

@@ -1,6 +1,7 @@
 # Namespace 
 # -----------------------------
 namespace: purely-app
+
 # -----------------------------
 # API Gateway
 # -----------------------------
@@ -8,7 +9,7 @@ apiGateway:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/tapi-gateway
+    repository: mohamedelrefy20/api-gateway
     tag: latest
   containerPort: 8080
   service:
@@ -24,7 +25,7 @@ authService:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/tauth-service
+    repository: mohamedelrefy20/auth-service
     tag: latest
   containerPort: 9030
   service:
@@ -46,7 +47,7 @@ cartService:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/tcart-service
+    repository: mohamedelrefy20/cart-service
     tag: latest
   containerPort: 9060
   service:
@@ -70,7 +71,7 @@ categoryService:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/tcategory-service
+    repository: mohamedelrefy20/category-service
     tag: latest
   containerPort: 9000
   service:
@@ -92,7 +93,7 @@ eurekaServer:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/teureka-server
+    repository: mohamedelrefy20/eureka-server
     tag: latest
   containerPort: 8761
   service:
@@ -114,8 +115,7 @@ frontend:
   service:
     type: ClusterIP
     port: 80
-  env:
-    apiBaseUrl: http://purely.com/api-gateway
+  
 
 # --------------------------------------------
 # Notification Service
@@ -124,7 +124,7 @@ notificationService:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/tnotification-service
+    repository: mohamedelrefy20/notification-service
     tag: latest
   containerPort: 9020
   service:
@@ -143,7 +143,7 @@ orderService:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/torder-service
+    repository: mohamedelrefy20/order-service
     tag: latest
   containerPort: 9070
   service:
@@ -164,7 +164,7 @@ productService:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/tproduct-service
+    repository: mohamedelrefy20/product-service
     tag: latest
   containerPort: 9010
   service:
@@ -290,7 +290,7 @@ userService:
   enabled: true
   replicaCount: 1
   image:
-    repository: mohamedelrefy20/tuser-service
+    repository: mohamedelrefy20/user-service
     tag: latest
   containerPort: 9050
   init:
@@ -321,4 +321,15 @@ ingress:
       service: api-gateway
       port: 8080
 
+#---------------------------------------
+# secrets
+#---------------------------------------
 
+secretName: secrets
+
+secrets: 
+  mongoUser: cm9vdA==
+  mongoPass: ZXhhbXBsZQ==
+  springMailUsername: ZWxyZWZ5bW9oYW1lZDIwQGdtYWlsLmNvbQ==
+  springMailPassword: ZmhmeCBjemFpIG1oeWogcnlvbg==
+  jwtSecret:  fD09PT09PT09PT09c3ByaW5nPWJvb3Q9cmVhY3Rqcz1wdXJlbHk9PT09PT09PT09fA==
